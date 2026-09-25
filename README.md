@@ -11,7 +11,7 @@
 **A production-ready, full-stack MERN hotel booking platform.**
 Real-time bed availability · Atomic double-booking prevention · Admin dashboard · Dark/Light mode
 
-[Live Demo](#) · [Report Bug](#) · [Request Feature](#)
+[Live Demo](https://book-stay-ai-y8oo.vercel.app/rooms) · [Report Bug](#) · [Request Feature](#)
 
 </div>
 

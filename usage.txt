@@ -1,0 +1,229 @@
+NOMADNEST APPLICATION USAGE GUIDE
+===================================
+
+1. START THE APPLICATION
+-------------------------
+
+Requirements:
+- Node.js 18 or newer
+- MongoDB Atlas or a local MongoDB server
+- Dependencies installed in both client and server folders
+
+Start the backend in PowerShell window 1:
+
+  cd "C:\Users\Umesh Reddy\Desktop\Hostel\server"
+  npm install
+  npm run dev
+
+Start the frontend in PowerShell window 2:
+
+  cd "C:\Users\Umesh Reddy\Desktop\Hostel\client"
+  npm install
+  npm run dev
+
+Open the application at:
+  http://localhost:5173
+
+The backend API runs at:
+  http://localhost:5000
+
+The server reads MongoDB and other settings from:
+  server/.env
+
+If the database is empty, create the demo data once:
+
+  cd "C:\Users\Umesh Reddy\Desktop\Hostel\server"
+  npm run seed
+
+WARNING: npm run seed deletes existing users, rooms, beds, and bookings before
+creating the sample data. Do not run it against a database containing data you
+want to keep.
+
+
+2. DEMO LOGIN ACCOUNTS
+----------------------
+
+All seeded demo accounts use this password:
+  Admin@1234
+
+Admin:
+  Email: admin@nomadnest.com
+  Role: Admin
+
+Staff:
+  Email: staff@nomadnest.com
+  Role: Staff
+
+Guest:
+  Email: guest@example.com
+  Role: Guest
+
+A new user registered through the Sign up page receives the Guest role.
+
+
+3. GUEST USAGE
+--------------
+
+Guests can browse rooms without logging in, but must log in before booking.
+
+Typical booking flow:
+1. Open http://localhost:5173.
+2. Use the search form or choose Explore to open /rooms.
+3. Select check-in date, check-out date, number of guests/beds, and optionally
+   Dorm or Private room type.
+4. Select a room to open its details page.
+5. Review the room photos, amenities, rating, price, and available beds.
+6. Choose dates and guest count, then select Book Now.
+7. Log in or create an account if requested.
+8. Review the price breakdown, including 18% GST, on the checkout page.
+9. Complete checkout to create the booking.
+10. View the confirmation page and booking reference.
+
+After logging in, guests can:
+- Open My Bookings from the user menu.
+- View upcoming and past stays.
+- Cancel an eligible upcoming booking.
+- View their profile information and booking totals.
+- Switch between light and dark mode.
+- Log out from the user menu.
+
+Guest permissions:
+- Search available rooms.
+- View room details.
+- Create bookings.
+- View only their own bookings.
+- Cancel their own bookings.
+
+
+4. STAFF USAGE
+--------------
+
+Log in with the Staff account and open Staff Dashboard or /staff.
+
+The Staff dashboard provides:
+- Today's revenue and active guest metrics.
+- Occupancy information.
+- Total booking count.
+- Recent bookings.
+- Live bed occupancy grid.
+- Guest management actions.
+
+Staff workflow:
+1. Open the Check-in / Check-out tab.
+2. Search by booking reference or guest name.
+3. For a Confirmed booking, select Check In when the guest arrives.
+4. For a CheckedIn booking, select Check Out when the guest leaves.
+5. Open the Bed Grid tab to inspect bed status.
+6. Select a bed cell to update its status when supported.
+7. Use Refresh after an operational change to load the latest data.
+
+Staff permissions:
+- Everything a guest can do.
+- View all bookings.
+- Check guests in.
+- Check guests out.
+- View the room and bed occupancy grid.
+- Update bed status.
+- View dashboard revenue and occupancy analytics.
+
+Staff cannot create, edit, or delete rooms. Room creation, editing, and
+deletion remain Admin-only operations. Staff will not see the Rooms tab.
+
+
+5. ADMIN USAGE
+--------------
+
+Log in with the Admin account and open Admin Dashboard or /admin.
+
+Admins can use all staff features plus administrator operations:
+- View revenue and occupancy analytics.
+- View all bookings and guest activity.
+- Manage rooms through the admin room APIs.
+- Create new rooms.
+- Update room details.
+- Delete rooms and their beds.
+
+In the Admin Dashboard, open the Rooms tab to create, edit, or delete room
+inventory. Creating a room automatically creates its beds. Room number, room
+type, bed count, price, floor, guest limit, status, and description can be
+managed there.
+
+Use admin access carefully because room changes affect availability and
+booking operations.
+
+
+6. MAIN APPLICATION PAGES
+-------------------------
+
+  /             Landing page and room search
+  /rooms        Room listing and availability search
+  /rooms/:id    Room details and booking widget
+  /login        Login page
+  /register     Guest registration page
+  /checkout     Booking checkout for authenticated users
+  /dashboard    Guest profile and booking history
+  /staff        Staff dashboard
+  /admin        Admin dashboard
+
+
+7. BOOKING STATUS VALUES
+------------------------
+
+Confirmed   Booking created and awaiting arrival.
+CheckedIn   Guest has arrived and is currently staying.
+CheckedOut  Guest has completed the stay.
+Cancelled   Booking was cancelled.
+NoShow      Guest did not arrive.
+
+Payment statuses include Pending, Paid, Refunded, and Failed.
+
+
+8. TROUBLESHOOTING
+------------------
+
+Frontend says the server is unavailable:
+- Confirm that the backend terminal is running with npm run dev.
+- Confirm that the backend is listening on port 5000.
+- Check that client/vite.config.js points API requests to the backend.
+
+Login or room data fails:
+- Confirm that server/.env contains a valid MONGO_URI.
+- Confirm that MongoDB Atlas allows the current IP address, or that local
+  MongoDB is running.
+- Run npm run seed in the server folder only if the database can be reset.
+
+Port already in use:
+- Stop the process using port 5000 or 5173, or configure another port.
+- Keep CLIENT_URL in server/.env aligned with the frontend URL.
+
+No rooms or demo accounts are visible:
+- Run npm run seed from the server folder.
+- Remember that seeding clears the current database first.
+
+
+9. USEFUL DEVELOPMENT COMMANDS
+------------------------------
+
+Backend development server:
+  cd server
+  npm run dev
+
+Backend production-style start:
+  cd server
+  npm start
+
+Seed sample data:
+  cd server
+  npm run seed
+
+Frontend development server:
+  cd client
+  npm run dev
+
+Frontend production build:
+  cd client
+  npm run build
+
+Frontend preview of the production build:
+  cd client
+  npm run preview

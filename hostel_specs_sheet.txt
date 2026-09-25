@@ -1,0 +1,54 @@
+HOSTEL MANAGEMENT WEBSITE SPECIFICATION SHEET
+=============================================
+
+PROJECT OVERVIEW
+----------------
+A web-based Hostel Management and Booking System built using the MERN stack (MongoDB, Express.js, React, Node.js). It allows guests to browse rooms, check availability, and book stays online, while providing an administrative dashboard for hostel staff to manage operations.
+
+TECH STACK & ARCHITECTURE
+-------------------------
+- Frontend: React.js, Tailwind CSS, Redux Toolkit (or Context API)
+  * Purpose: Responsive UI, state management, interactive calendar/booking flows.
+- Backend: Node.js, Express.js
+  * Purpose: RESTful API development, request routing, business logic execution.
+- Database: MongoDB (with Mongoose ODM)
+  * Purpose: NoSQL database for flexible data models (users, rooms, bookings).
+- Authentication: JWT (JSON Web Tokens) & bcrypt.js
+  * Purpose: Secure user login, registration, and role-based access control.
+- Hosting/Cloud: AWS S3 or Cloudinary
+  * Purpose: Storing user profile pictures and high-quality room images.
+
+KEY MODULES & FUNCTIONAL FEATURES
+---------------------------------
+1. User & Guest Module
+   - Registration & Login: Secure signup via email/password or Google OAuth.
+   - Profile Management: Edit personal details, view upcoming/past bookings, and download invoices.
+   - Public Booking Engine: Search rooms by check-in/check-out dates, guest count, and room type (dorm vs. private room).
+
+2. Room & Inventory Management
+   - Room Categorisation: Define rooms by type (e.g., 4-bed female dorm, 6-bed mixed dorm, private deluxe).
+   - Bed-Level Tracking: Track individual bed availability in shared dorms, not just the room as a whole.
+   - Dynamic Pricing: Set different rates for weekends, holidays, or peak travel seasons.
+
+3. Booking & Payment Engine
+   - Real-Time Availability: Prevent double-booking beds during simultaneous user checkouts.
+   - Payment Gateway Integration: Secure payment processing via Razorpay, Stripe, or PayPal.
+   - Automated Confirmations: Trigger instant email/SMS notifications with booking summaries and QR codes for check-in.
+
+4. Admin Dashboard (Staff Portal)
+   - Live Grid View: A visual calendar dashboard showing occupied, vacant, and dirty rooms/beds.
+   - Check-in/Check-out Control: Quick-action buttons to check guests in, assign them a specific bed, and log check-outs.
+   - Financial Analytics: Charts tracking monthly revenue, occupancy rates, and pending payments.
+
+DATABASE SCHEMA DESIGN (CORE COLLECTIONS)
+-----------------------------------------
+- Users: _id, name, email, passwordHash, role (Guest, Staff, Admin), phone.
+- Rooms: _id, roomNumber, roomType (Dorm/Private), totalBeds, pricePerNight, amenities (Array), images (Array), status (Available, Cleaning, Maintenance).
+- Beds: _id, roomId (Reference), bedNumber, isOccupied.
+- Bookings: _id, guestId (Reference), roomId (Reference), assignedBeds (Array), checkInDate, checkOutDate, totalPrice, paymentStatus (Pending, Paid, Refunded), bookingStatus (Confirmed, CheckedIn, CheckedOut, Cancelled).
+
+NON-FUNCTIONAL & SECURITY REQUIREMENTS
+--------------------------------------
+- Security: Implement CORS protection, Helmet.js for secure HTTP headers, and data sanitisation to prevent NoSQL injection.
+- Scalability: Design stateless JWT authentication so the Node.js backend can scale horizontally if traffic spikes during holiday seasons.
+- Responsive Design: Mobile-first user interface, as most backpackers book hostels directly from their smartphones.

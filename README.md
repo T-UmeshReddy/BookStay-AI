@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white" />
 <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" />
 
-# 🏨 NomadNest — Hostel Management & Booking System
+# 🏨 NomadNest — Hotel Management & Booking System
 
 **A production-ready, full-stack MERN hostel booking platform.**
 Real-time bed availability · Atomic double-booking prevention · Admin dashboard · Dark/Light mode

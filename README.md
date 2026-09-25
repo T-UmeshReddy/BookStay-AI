@@ -8,7 +8,7 @@
 
 # 🏨 NomadNest — Hotel Management & Booking System
 
-**A production-ready, full-stack MERN hostel booking platform.**
+**A production-ready, full-stack MERN hotel booking platform.**
 Real-time bed availability · Atomic double-booking prevention · Admin dashboard · Dark/Light mode
 
 [Live Demo](#) · [Report Bug](#) · [Request Feature](#)
